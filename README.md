@@ -19,11 +19,11 @@ A: Usernames and passwords are hardcoded and found in __simonex.m__. Customize *
 Q: Why hardcoded usernames and passwords?  
 A: Very simple to move username and password between simulators and devices without worrying about sandboxes and access rights, if the _dylib_ could be loaded, username and password could be too.
 
-Q: How to create the _simonex.dylib_?  
-A: Just call _make_ and that should do the trick.
+Q: How to create the `simonex.dylib`?  
+A: Just call `make` and that should do the trick.
 
 Q: Code signing of *simonex.dylib* did not work, what can I do?  
-A: Either call _make dylib_ and sign manually via
+A: Either call `make dylib` and sign manually via
 ```
 codesign -f -s YOUR_CODESIGN_IDENTITY
 ```   
@@ -32,7 +32,7 @@ or call
 make CODESIGN_IDENTITY="Your iPhone Developer identity"
 ```
 
-Q: How to install __Simonex__?  
+Q: How to install `simonex.dylib`?  
 A: Via Xcode and environment variables
 ```
 DYLD_INSERT_LIBRARIES="/YOUR_PATH_TO/simonex.dylib"
@@ -48,10 +48,10 @@ A: Less project overhead and very simple to use it on multiple simulators or dev
 Q: Will it run within the simulator only or on devices too?  
 A: Simonex runs on both simulator and devices.
 
-Q: Will it affect my AppStore app in any way?  
-A: Nope, Simonex runs only during development, either injected via Xcode or lldb.
+Q: It doesn't run on the device/Xcode throws an error if `DYLD_INSERT_LIBRARIES` is used, what can I do?  
+A: To use it on a device, you have to copy `simonex.dylib` into the iOS application and adjust the path to the dylib accordingly.
 
-Q: How can I automatically inject _simonex.dylib_ via lldb?  
+Q: How can I automatically inject `simonex.dylib` via lldb?  
 A: Insert following lines into your _.lldbinit_ file.
 ```Python
 br set -S "+[OnePasswordExtension sharedExtension]" -o true -N simonex  
@@ -67,5 +67,8 @@ br dis -N simonex
 ```
 
 to temporarily disable the breakpoint and therefore the code injection.  
-Use it in conjunction with [Trampoline](https://github.com/obayer/Trampoline) to inject _simonex.dylib_ only for a
+Use it in conjunction with [Trampoline](https://github.com/obayer/Trampoline) to inject `simonex.dylib` only for a
 specific target and/or architecture.
+
+Q: Will it affect my AppStore app in any way?  
+A: Nope, Simonex runs only during development, either injected via Xcode or lldb.
